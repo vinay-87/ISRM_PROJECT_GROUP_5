@@ -21,8 +21,6 @@ The project demonstrates:
 * secure file upload handling
 * login throttling / brute-force protection
 * CSRF protection
-* security headers
-* audit logging
 * automated security scanning with GitHub Actions
 * report generation as build artifacts
 
@@ -61,7 +59,7 @@ Recommended Python packages are listed in each project’s `requirements.txt`.
 ### Step 1: Clone the repository
 
 ```powershell
-git clone https://github.com/<your-username>/ISRM_PROJECT_GROUP_5.git
+git clone https://github.com/vinay-87/ISRM_PROJECT_GROUP_5.git
 cd ISRM_PROJECT_GROUP_5
 ```
 
@@ -176,9 +174,9 @@ Both versions include demo accounts for testing.
 
 ---
 
-## 7) What to Demonstrate in the Vulnerable App
+## 7) What demonstrated in the Vulnerable App
 
-The original application is intentionally insecure so it can be used for security analysis and classroom demonstration.
+The original application is intentionally insecure so it can be used for cyber security analysis and vulnerabilities demonstration.
 
 | Topic                  | Demonstration                                                       |
 | ---------------------- | ------------------------------------------------------------------- |
@@ -206,26 +204,10 @@ The patched application adds security controls that address the issues above.
 | Unsafe upload            | Extension allowlist, size limit, safe filename      |
 | Brute-force risk         | Login throttling                                    |
 | CSRF risk                | CSRF token on POST forms                            |
-| Weak browser defaults    | Security headers                                    |
-| No accountability        | Audit log for role, upload, and student changes     |
 
 ---
 
-## 9) Testing
-
-Run the test suite in either project folder:
-
-```powershell
-python -m pytest -q
-```
-
-For the vulnerable app, the tests help confirm the original behavior that is being analyzed.
-
-For the patched app, the tests verify that the secure behavior is working as intended.
-
----
-
-## 10) CI/CD Security Automation
+## 9) CI/CD Security Automation
 
 This repository uses **GitHub Actions** to automate security scanning.
 
@@ -248,7 +230,7 @@ This demonstrates **Shift-Left DevSecOps**, where security is built into the dev
 
 ---
 
-## 11) GitHub Actions Behavior
+## 10) GitHub Actions Behavior
 
 The workflow does the following:
 
@@ -265,46 +247,7 @@ The reports can be downloaded from the **Actions** tab in GitHub.
 
 ---
 
-## 12) Why This Repository Has Two Versions
-
-This is useful for showing a complete security story:
-
-* the **original version** shows what insecure code looks like
-* the **patched version** shows how to fix it properly
-* the **CI/CD pipeline** proves that security scanning works automatically
-
-This makes the repository strong for:
-
-* college submission
-* security lab demonstration
-* DevSecOps explanation
-* project viva
-* GitHub portfolio presentation
-
----
-
-## 13) Suggested Demo Flow
-
-1. Show the repository structure.
-2. Open the vulnerable app and explain the issues.
-3. Open the patched app and explain the fixes.
-4. Show the GitHub Actions workflow file.
-5. Open the Actions tab and show the scan run.
-6. Show the uploaded artifact reports.
-7. Explain how the pipeline supports secure development.
-
----
-
-## 14) Notes
-
-* Do not upload virtual environments, node_modules, or temporary files.
-* Keep the root repository as the only Git repository.
-* Do not keep nested `.git` folders inside the two project folders.
-* If your workflow file name differs, update the path in this README accordingly.
-
----
-
-## 15) Summary
+## 11) Summary
 
 This repository demonstrates a full security lifecycle:
 
@@ -314,4 +257,3 @@ This repository demonstrates a full security lifecycle:
 * artifact-based reporting
 * practical DevSecOps implementation
 
-It is designed to be easy to understand, easy to demo, and easy to extend.
