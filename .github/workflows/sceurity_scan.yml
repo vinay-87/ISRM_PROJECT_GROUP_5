@@ -10,75 +10,68 @@ on:
       - main
 
 jobs:
-
   scan-student_management_system:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-    steps:
-
+  steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: "3.11"
 
     - name: Install Bandit
       run: pip install bandit
 
-    # Vulnerable app scan
-    - name: Scan student_management_system
-      id: vulnerable_scan
+    # Step 1: Generate JSON report
+    - name: Generate Bandit Report
       continue-on-error: true
       run: |
         bandit -r student_management_system \
         -f json \
         -o student_management_system-report.json
 
-    # Upload report EVEN IF scan failed
-    - name: Upload student_management_system Report
-      uses: actions/upload-artifact@v4
+    # Step 2: Upload artifact ALWAYS
+    - name: Upload Bandit Report
       if: always()
+      uses: actions/upload-artifact@v4
       with:
         name: student_management_system-bandit-report
         path: student_management_system-report.json
 
-    # Explicitly fail workflow if vulnerabilities exist
-    - name: Fail Workflow for Vulnerable App
-      if: steps.vulnerable_scan.outcome == 'failure'
+    # Step 3: Security gate enforcement
+    - name: Enforce Security Gate
       run: |
-        echo "High severity vulnerabilities detected!"
-        exit 1
-
+        bandit -r student_management_system --severity-level high
 
   scan-patch_student_management_system:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - name: Install Bandit
+        run: pip install bandit
 
-    - name: Install Bandit
-      run: pip install bandit
+      # Patched app scan
+      - name: Scan patch_student_management_system
+        run: |
+          bandit -r patch_student_management_system \
+          -f json \
+          -o patch_student_management_system-report.json
 
-    # Patched app scan
-    - name: Scan patch_student_management_system
-      run: |
-        bandit -r patch_student_management_system \
-        -f json \
-        -o patch_student_management_system-report.json
-
-    # Upload report
-    - name: Upload patch_student_management_system Report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: patch_student_management_system-bandit-report
-        path: patch_student_management_system-report.json
+      # Upload report
+      - name: Upload patch_student_management_system Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: patch_student_management_system-bandit-report
+          path: patch_student_management_system-report.json
