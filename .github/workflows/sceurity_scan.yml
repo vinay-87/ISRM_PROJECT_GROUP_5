@@ -10,7 +10,6 @@ on:
       - main
 
 jobs:
-
   scan-student_management_system:
     runs-on: ubuntu-latest
 
@@ -45,8 +44,7 @@ jobs:
       # Step 3: Security gate enforcement
       - name: Enforce Security Gate
         run: |
-          bandit -r student_management_system --severity-level high
-
+          bandit -r student_management_system --severity-level medium
 
   scan-patch_student_management_system:
     runs-on: ubuntu-latest
@@ -82,4 +80,4 @@ jobs:
       # Step 3: Security enforcement
       - name: Enforce Security Gate
         run: |
-          bandit -r patch_student_management_system --severity-level high
+          bandit -r patch_student_management_system --severity-level medium
