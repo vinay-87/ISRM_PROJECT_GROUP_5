@@ -93,13 +93,14 @@ python -m pip install -r requirements.txt
 
 ### Step 5: Set up the database
 
-Run the SQL seed file:
+1) Run the SQL seed file:
 
 ```powershell
 mysql -u root -p < setup_database.sql
 ```
+- OR -
 
-If the MySQL CLI is not available in PATH, use the helper script:
+2) If the MySQL CLI is not available in PATH, use the helper script:
 
 ```powershell
 python seed_mysql.py
