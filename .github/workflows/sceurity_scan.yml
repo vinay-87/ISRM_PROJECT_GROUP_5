@@ -27,24 +27,29 @@ jobs:
     - name: Install Bandit
       run: pip install bandit
 
-    # Generate report even if vulnerabilities exist
-    - name: Generate student_management_system Report
+    # Vulnerable app scan
+    - name: Scan student_management_system
+      id: vulnerable_scan
+      continue-on-error: true
       run: |
         bandit -r student_management_system \
         -f json \
-        -o student_management_system-report.json || true
+        -o student_management_system-report.json
 
-    # Upload report artifact
+    # Upload report EVEN IF scan failed
     - name: Upload student_management_system Report
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: student_management_system-bandit-report
         path: student_management_system-report.json
 
-    # Enforce security gate
-    - name: Fail on High Severity Vulnerabilities
+    # Explicitly fail workflow if vulnerabilities exist
+    - name: Fail Workflow for Vulnerable App
+      if: steps.vulnerable_scan.outcome == 'failure'
       run: |
-        bandit -r student_management_system --severity-level high
+        echo "High severity vulnerabilities detected!"
+        exit 1
 
 
   scan-patch_student_management_system:
@@ -63,21 +68,17 @@ jobs:
     - name: Install Bandit
       run: pip install bandit
 
-    # Generate report
-    - name: Generate patch_student_management_system Report
+    # Patched app scan
+    - name: Scan patch_student_management_system
       run: |
         bandit -r patch_student_management_system \
         -f json \
-        -o patch_student_management_system-report.json || true
+        -o patch_student_management_system-report.json
 
-    # Upload artifact
+    # Upload report
     - name: Upload patch_student_management_system Report
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: patch_student_management_system-bandit-report
         path: patch_student_management_system-report.json
-
-    # Security enforcement
-    - name: Fail on High Severity Vulnerabilities
-      run: |
-        bandit -r patch_student_management_system --severity-level high
