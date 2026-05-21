@@ -10,41 +10,43 @@ on:
       - main
 
 jobs:
+
   scan-student_management_system:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Install Bandit
-      run: pip install bandit
+      - name: Install Bandit
+        run: pip install bandit
 
-    # Step 1: Generate JSON report
-    - name: Generate Bandit Report
-      continue-on-error: true
-      run: |
-        bandit -r student_management_system \
-        -f json \
-        -o student_management_system-report.json
+      # Step 1: Generate JSON report
+      - name: Generate Bandit Report
+        continue-on-error: true
+        run: |
+          bandit -r student_management_system \
+          -f json \
+          -o student_management_system-report.json
 
-    # Step 2: Upload artifact ALWAYS
-    - name: Upload Bandit Report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: student_management_system-bandit-report
-        path: student_management_system-report.json
+      # Step 2: Upload artifact ALWAYS
+      - name: Upload Bandit Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: student_management_system-bandit-report
+          path: student_management_system-report.json
 
-    # Step 3: Security gate enforcement
-    - name: Enforce Security Gate
-      run: |
-        bandit -r student_management_system --severity-level high
+      # Step 3: Security gate enforcement
+      - name: Enforce Security Gate
+        run: |
+          bandit -r student_management_system --severity-level high
+
 
   scan-patch_student_management_system:
     runs-on: ubuntu-latest
@@ -61,17 +63,23 @@ jobs:
       - name: Install Bandit
         run: pip install bandit
 
-      # Patched app scan
-      - name: Scan patch_student_management_system
+      # Step 1: Generate JSON report
+      - name: Generate Patched App Report
+        continue-on-error: true
         run: |
           bandit -r patch_student_management_system \
           -f json \
           -o patch_student_management_system-report.json
 
-      # Upload report
-      - name: Upload patch_student_management_system Report
-        uses: actions/upload-artifact@v4
+      # Step 2: Upload artifact
+      - name: Upload Patched App Report
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: patch_student_management_system-bandit-report
           path: patch_student_management_system-report.json
+
+      # Step 3: Security enforcement
+      - name: Enforce Security Gate
+        run: |
+          bandit -r patch_student_management_system --severity-level high
