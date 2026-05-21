@@ -1,0 +1,8 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.sqlite3
+uploads/*
+!uploads/.gitkeep
+bandit_report.html

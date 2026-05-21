@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Admin Panel</h1>
+                <p>Logged in as {{ username }}. Manage users and roles.</p>
+            </div>
+        </header>
+
+        <div class="card">
+            <nav>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/upload">Upload Document</a>
+                <a href="/logout">Logout</a>
+            </nav>
+
+            <h2>User Accounts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.role }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="card" style="margin-top: 24px; background: rgba(15,23,42,0.65);">
+                <h3>Change Role</h3>
+                <form method="post" action="/admin">
+                    <label>Target Username</label>
+                    <input type="text" name="username" required>
+
+                    <label>New Role</label>
+                    <select name="role">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+
+                    <button type="submit">Change Role</button>
+                </form>
+            </div>
+
+            <p class="footer-note">Role changes are applied immediately.</p>
+        </div>
+    </div>
+</body>
+</html>

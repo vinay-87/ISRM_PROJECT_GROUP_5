@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Upload Document</h1>
+                <p>Upload student documents for analysis and test file-handling behavior.</p>
+            </div>
+        </header>
+        <div class="card">
+            <form method="post" enctype="multipart/form-data">
+                <label>Select file to upload</label>
+                <input type="file" name="file" required>
+                <button type="submit">Upload</button>
+            </form>
+            <p class="footer-note">Any file type is allowed, including scripts and executables.</p>
+            <a href="/dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

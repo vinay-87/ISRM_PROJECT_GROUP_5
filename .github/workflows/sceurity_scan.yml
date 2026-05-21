@@ -1,0 +1,62 @@
+name: Multi-Project Security Scan
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  scan-student_management_system:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Bandit
+      run: pip install bandit
+
+    - name: Scan student_management_system
+      run: |
+        bandit -r student_management_system -f json -o student_management_system-report.json
+
+    - name: Upload student_management_system Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: student_management_system-bandit-report
+        path: student_management_system-report.json
+
+  scan-patch_student_management_system:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Bandit
+      run: pip install bandit
+
+    - name: Scan patch_student_management_system
+      run: |
+        bandit -r patch_student_management_system -f json -o patch_student_management_system-report.json
+
+    - name: Upload patch_student_management_system Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: patch_student_management_system-bandit-report
+        path: patch_student_management_system-report.json

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Student Management System</h1>
+                <p>Create an account for practice exploitation and analysis.</p>
+            </div>
+        </header>
+        <div class="card">
+            <h2>Register</h2>
+            <form method="post">
+                <label>Username</label>
+                <input type="text" name="username" required>
+                <label>Password</label>
+                <input type="password" name="password" required>
+                <label>Role</label>
+                <select name="role">
+                    <option value="user" selected>User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit">Register</button>
+            </form>
+            <p class="footer-note">Already registered? <a href="/login">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome, {{ username }}. Role: {{ role }}</p>
+            </div>
+        </header>
+        <div class="card">
+            <nav>
+                <a href="/student/add">Add Student</a>
+                <a href="/upload">Upload Document</a>
+                <a href="/admin">Admin Panel</a>
+                <a href="/api/students">API (Students)</a>
+                <a href="/logout">Logout</a>
+            </nav>
+            <h2>Student Records</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Email</th><th>Course</th><th>Year</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.name|safe }}</td>
+                        <td>{{ student.email|safe }}</td>
+                        <td>{{ student.course|safe }}</td>
+                        <td>{{ student.year|safe }}</td>
+                        <td>
+                            <a href="/student/edit/{{ student.id }}">Edit</a>
+                            <form method="post" action="/student/delete/{{ student.id }}" style="display:inline;">
+                                <button type="submit" class="link-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="footer-note">All student records are displayed in this dashboard.</p>
+        </div>
+    </div>
+</body>
+</html>
