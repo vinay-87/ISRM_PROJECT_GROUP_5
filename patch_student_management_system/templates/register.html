@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Student Management System</h1>
+                <p>Create an account to access student records securely.</p>
+            </div>
+        </header>
+        <div class="card">
+            <h2>Register</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="alert {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="post" action="/register">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+
+                <button type="submit">Register</button>
+            </form>
+            <p class="footer-note">New accounts are created with user access. Only an admin can change roles.</p>
+            <p class="footer-note">Already registered? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

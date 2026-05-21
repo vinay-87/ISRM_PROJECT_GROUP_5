@@ -1,0 +1,12 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.sqlite3
+instance/
+uploads/*
+!uploads/.gitkeep
+bandit_report.html
+bandit-report.json
+.env
+"bandit_report.html" 

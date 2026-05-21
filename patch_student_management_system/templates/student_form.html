@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ action }} Student</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>{{ action }} Student</h1>
+                <p>Use the form below to manage student records.</p>
+            </div>
+        </header>
+        <div class="card">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="alert {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="post" action="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{ student.name|e if student else '' }}" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ student.email|e if student else '' }}" required>
+
+                <label for="course">Course</label>
+                <input type="text" id="course" name="course" value="{{ student.course|e if student else '' }}" required>
+
+                <label for="year">Year</label>
+                <input type="text" id="year" name="year" value="{{ student.year|e if student else '' }}" required>
+
+                <button type="submit">{{ action }}</button>
+            </form>
+            <p class="footer-note"><a href="/dashboard">Back to Dashboard</a></p>
+        </div>
+    </div>
+</body>
+</html>

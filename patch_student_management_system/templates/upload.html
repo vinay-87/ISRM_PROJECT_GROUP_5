@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Upload Document</h1>
+                <p>Upload student documents securely. Only safe file types are allowed.</p>
+            </div>
+        </header>
+        <div class="card">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="alert {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="post" enctype="multipart/form-data" action="/upload">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label for="file">Select file to upload</label>
+                <input type="file" id="file" name="file" required>
+                <button type="submit">Upload</button>
+            </form>
+            <p class="footer-note">Allowed file types: PDF, DOCX, JPG, PNG. Maximum size: 5 MB.</p>
+            <a href="/dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

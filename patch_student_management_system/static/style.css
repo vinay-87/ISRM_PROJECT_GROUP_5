@@ -1,0 +1,218 @@
+body {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #475569 100%);
+    color: #e2e8f0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    letter-spacing: -0.03em;
+}
+
+header p {
+    margin: 0;
+    color: #94a3b8;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: 0 auto 48px;
+    padding: 32px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 8px;
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.4);
+}
+
+.card {
+    background: rgba(30, 41, 59, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 8px;
+    padding: 28px;
+    margin-top: 24px;
+}
+
+h1, h2, h3 {
+    margin: 0 0 16px;
+    color: #f8fafc;
+}
+
+p, label, td, th, a {
+    color: #cbd5e1;
+}
+
+form {
+    display: grid;
+    gap: 14px;
+}
+
+label {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #38bdf8;
+    color: #0f172a;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+button:hover {
+    background: #0ea5e9;
+    transform: translateY(-1px);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    background: rgba(96, 165, 250, 0.12);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #bfdbfe;
+    transition: background 0.2s ease;
+}
+
+nav a:hover {
+    background: rgba(96, 165, 250, 0.24);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+th {
+    background: rgba(15, 23, 42, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.86rem;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(148, 163, 184, 0.08);
+}
+
+tbody tr:hover {
+    background: rgba(96, 165, 250, 0.12);
+}
+
+a {
+    color: #7dd3fc;
+}
+
+.footer-note {
+    margin-top: 24px;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.alert {
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: rgba(248, 113, 113, 0.14);
+    border: 1px solid rgba(248, 113, 113, 0.24);
+    color: #fecaca;
+    margin-bottom: 20px;
+}
+
+.alert.success {
+    background: rgba(34, 197, 94, 0.14);
+    border-color: rgba(34, 197, 94, 0.24);
+    color: #bbf7d0;
+}
+
+.panel {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.actions form {
+    display: inline;
+}
+
+.link-button {
+    padding: 0;
+    background: transparent;
+    color: #7dd3fc;
+    font: inherit;
+    font-weight: 400;
+    border: 0;
+}
+
+.link-button:hover {
+    background: transparent;
+    color: #bae6fd;
+    transform: none;
+    text-decoration: underline;
+}

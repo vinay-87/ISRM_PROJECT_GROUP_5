@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Student Management System</h1>
+                <p>Secure authentication for student records management.</p>
+            </div>
+        </header>
+        <div class="card">
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="alert {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="post" action="/login">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+
+                <button type="submit">Login</button>
+            </form>
+            <p class="footer-note">New user? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

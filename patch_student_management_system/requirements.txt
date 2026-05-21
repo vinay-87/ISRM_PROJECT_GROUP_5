@@ -1,0 +1,7 @@
+Flask==3.0.2
+mysql-connector-python==9.0.0
+bcrypt==4.2.0
+flask-limiter==3.8.0
+pytest==8.3.2
+requests==2.32.3
+bandit==1.7.10

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome, {{ username }}. Role: {{ role }}</p>
+            </div>
+        </header>
+        <div class="card">
+            <nav>
+                {% if role == "admin" %}
+                <a href="/student/add">Add Student</a>
+                <a href="/admin">Admin Panel</a>
+                <a href="/api/students">API (Students)</a>
+                {% endif %}
+                <a href="/upload">Upload Document</a>
+                <a href="/logout">Logout</a>
+            </nav>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="alert {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <h2>Student Records</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <!-- Secure rendering: escaped output -->
+                        <td>{{ student.name|e }}</td>
+                        <td>{{ student.email|e }}</td>
+                        <td>{{ student.course|e }}</td>
+                        <td>{{ student.year|e }}</td>
+                        <td class="actions">
+                            {% if role == "admin" %}
+                            <a href="/student/edit/{{ student.id }}">Edit</a>
+                            <form method="post" action="/student/delete/{{ student.id }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="link-button">Delete</button>
+                            </form>
+                            {% else %}
+                            View only
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <p class="footer-note">All student records are displayed in this dashboard.</p>
+        </div>
+    </div>
+</body>
+</html>
